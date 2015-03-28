@@ -12,10 +12,10 @@ void SetMotorBits(int m1a, int m1b, int m2a, int m2b){
 	GPIO_ResetBits(GPIOA, GPIO_Pin_6);
 	GPIO_ResetBits(GPIOB, GPIO_Pin_0 | GPIO_Pin_8);
 	GPIO_ResetBits(GPIOE, GPIO_Pin_2);
-	if(m1a) GPIO_SetBits(GPIOA, GPIO_Pin_6);
-	if(m1b) GPIO_SetBits(GPIOB, GPIO_Pin_0);
-	if(m2a) GPIO_SetBits(GPIOE, GPIO_Pin_2);
-	if(m2b) GPIO_SetBits(GPIOB, GPIO_Pin_8);
+	if(m1a == 1 ) GPIO_SetBits(GPIOA, GPIO_Pin_6);
+	if(m1b == 1 ) GPIO_SetBits(GPIOB, GPIO_Pin_0);
+	if(m2a == 1 ) GPIO_SetBits(GPIOE, GPIO_Pin_2);
+	if(m2b == 1 ) GPIO_SetBits(GPIOB, GPIO_Pin_8);
 }
 
 void driveForward(void){
@@ -25,10 +25,11 @@ void driveBackward(void){
 	SetMotorBits(1,0,1,0);
 }
 void SpinLeft(void){
-	SetMotorBits(0,1,1,0);
+	SetMotorBits(1,0,0,1);
 }
 void SpinRight(void){
-	SetMotorBits(1,0,0,1);
+
+	SetMotorBits(0,1,1,0);
 }
 void StopMotor(void){
 	SetMotorBits(0,0,0,0);
@@ -91,10 +92,15 @@ int main(void) {
 
     while (1) {
     		driveForward();
-    		//GPIO_ToggleBits(GPIOA, GPIO_Pin_6);
-    		//GPIO_ToggleBits(GPIOB, GPIO_Pin_0 | GPIO_Pin_8);
-    		//GPIO_ToggleBits(GPIOE, GPIO_Pin_2);
-    		//int i=0;
-    		//for(i=0;i<15000000;i++){}
+    		int i=0;for(i=0;i<15000000;i++){}
+
+    		SpinLeft();
+    		for(i=0;i<10000000;i++){}
+
+    		driveForward();
+    		for(i=0;i<15000000;i++){}
+
+    		StopMotor();
+    		for(i=0;i<10000000;i++){}
     }
 }
