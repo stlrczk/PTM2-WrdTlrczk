@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="4.9.3 -mcpu=cortex-m4 -mthumb -g -nostartfiles -Map=second-one.map -O0 --gc-sections -LC:\CooCox\CoIDE\configuration\ProgramData\second-one -TC:\CooCox\CoIDE\configuration\ProgramData\second-one/arm-gcc-link.ld -g">
+      <target file="second-one.elf" lastModified="14c61a16e9b">
+         <source file="..\obj\startup_stm32f4xx.o" lastModified="14c61a167f0"/>
+         <source file="..\obj\main.o" lastModified="14c61a16871"/>
+         <source file="..\obj\stm32f4xx_rcc.o" lastModified="14c61a168fd"/>
+         <source file="..\obj\stm32f4xx_gpio.o" lastModified="14c61a16962"/>
+         <source file="..\obj\system_stm32f4xx.o" lastModified="14c61a169b5"/>
+         <source file="..\obj\tm_stm32f4_pwm.o" lastModified="14c61a16a40"/>
+         <source file="..\obj\tm_stm32f4_gpio.o" lastModified="14c61a16aaa"/>
+         <source file="..\obj\stm32f4xx_rtc.o" lastModified="14c61a16b5a"/>
+         <source file="..\obj\tm_stm32f4_timer_properties.o" lastModified="14c61a16bbb"/>
+         <source file="..\obj\stm32f4xx_tim.o" lastModified="14c61a16c93"/>
+      </target>
+   </processor>
+</history>
