@@ -1,10 +1,40 @@
-/* Include core modules */
+
 #include "stm32f4xx.h"
 #include "stm32f4xx_gpio.h"
 #include "stm32f4xx_rcc.h"
-/* Include my libraries here */
 #include "defines.h"
 #include "tm_stm32f4_pwm.h"
+
+
+void SetMotorBits(int m1a, int m1b, int m2a, int m2b){
+	//Motor1 - PA6, PB0
+	//Motor2 - PE2, PB8
+	GPIO_ResetBits(GPIOA, GPIO_Pin_6);
+	GPIO_ResetBits(GPIOB, GPIO_Pin_0 | GPIO_Pin_8);
+	GPIO_ResetBits(GPIOE, GPIO_Pin_2);
+	if(m1a) GPIO_SetBits(GPIOA, GPIO_Pin_6);
+	if(m1b) GPIO_SetBits(GPIOB, GPIO_Pin_0);
+	if(m2a) GPIO_SetBits(GPIOE, GPIO_Pin_2);
+	if(m2b) GPIO_SetBits(GPIOB, GPIO_Pin_8);
+}
+
+void driveForward(void){
+	SetMotorBits(0,1,0,1);
+}
+void driveBackward(void){
+	SetMotorBits(1,0,1,0);
+}
+void SpinLeft(void){
+	SetMotorBits(0,1,1,0);
+}
+void SpinRight(void){
+	SetMotorBits(1,0,0,1);
+}
+void StopMotor(void){
+	SetMotorBits(0,0,0,0);
+}
+
+
 
 int main(void) {
 	SystemInit();
@@ -60,10 +90,11 @@ int main(void) {
 
 
     while (1) {
-    		GPIO_ToggleBits(GPIOA, GPIO_Pin_6);
-    		GPIO_ToggleBits(GPIOB, GPIO_Pin_0 | GPIO_Pin_8);
-    		GPIO_ToggleBits(GPIOE, GPIO_Pin_2);
-    		int i=0;
-    		for(i=0;i<15000000;i++){}
+    		driveForward();
+    		//GPIO_ToggleBits(GPIOA, GPIO_Pin_6);
+    		//GPIO_ToggleBits(GPIOB, GPIO_Pin_0 | GPIO_Pin_8);
+    		//GPIO_ToggleBits(GPIOE, GPIO_Pin_2);
+    		//int i=0;
+    		//for(i=0;i<15000000;i++){}
     }
 }
