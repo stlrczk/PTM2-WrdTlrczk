@@ -1,17 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
    <processor signature="4.9.3 -mcpu=cortex-m4 -mthumb -g -nostartfiles -Map=second-one.map -O0 --gc-sections -LC:\CooCox\CoIDE\configuration\ProgramData\second-one -TC:\CooCox\CoIDE\configuration\ProgramData\second-one/arm-gcc-link.ld -g">
-      <target file="second-one.elf" lastModified="14c61c8339a">
-         <source file="..\obj\startup_stm32f4xx.o" lastModified="14c61c82d1d"/>
-         <source file="..\obj\main.o" lastModified="14c61c82d80"/>
-         <source file="..\obj\stm32f4xx_rcc.o" lastModified="14c61c82e01"/>
-         <source file="..\obj\stm32f4xx_gpio.o" lastModified="14c61c82e61"/>
-         <source file="..\obj\system_stm32f4xx.o" lastModified="14c61c82eb9"/>
-         <source file="..\obj\tm_stm32f4_pwm.o" lastModified="14c61c82f4a"/>
-         <source file="..\obj\tm_stm32f4_gpio.o" lastModified="14c61c82fb5"/>
-         <source file="..\obj\stm32f4xx_rtc.o" lastModified="14c61c83062"/>
-         <source file="..\obj\tm_stm32f4_timer_properties.o" lastModified="14c61c830c6"/>
-         <source file="..\obj\stm32f4xx_tim.o" lastModified="14c61c83196"/>
+      <target file="second-one.elf" lastModified="14c6c4e9016">
+         <source file="..\obj\startup_stm32f4xx.o" lastModified="14c6c4e87bf"/>
+         <source file="..\obj\main.o" lastModified="14c6c4e884c"/>
+         <source file="..\obj\stm32f4xx_rcc.o" lastModified="14c6c4e88e5"/>
+         <source file="..\obj\tm_stm32f4_hcsr04.o" lastModified="14c6c4e8949"/>
+         <source file="..\obj\tm_stm32f4_delay.o" lastModified="14c6c4e89ae"/>
+         <source file="..\obj\stm32f4xx_gpio.o" lastModified="14c6c4e8a1a"/>
+         <source file="..\obj\system_stm32f4xx.o" lastModified="14c6c4e8a77"/>
+         <source file="..\obj\tm_stm32f4_pwm.o" lastModified="14c6c4e8b17"/>
+         <source file="..\obj\tm_stm32f4_gpio.o" lastModified="14c6c4e8b8c"/>
+         <source file="..\obj\stm32f4xx_rtc.o" lastModified="14c6c4e8c62"/>
+         <source file="..\obj\tm_stm32f4_timer_properties.o" lastModified="14c6c4e8ccf"/>
+         <source file="..\obj\stm32f4xx_tim.o" lastModified="14c6c4e8daa"/>
       </target>
    </processor>
 </history>

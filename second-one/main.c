@@ -1,10 +1,11 @@
-
 #include "stm32f4xx.h"
 #include "stm32f4xx_gpio.h"
 #include "stm32f4xx_rcc.h"
 #include "defines.h"
 #include "tm_stm32f4_pwm.h"
+#include "tm_stm32f4_hcsr04.h"
 
+float ODL;
 
 void SetMotorBits(int m1a, int m1b, int m2a, int m2b){
 	//Motor1 - PA6, PB0
@@ -39,6 +40,8 @@ void StopMotor(void){
 
 int main(void) {
 	SystemInit();
+	TM_HCSR04_t HCSR04;
+	TM_DELAY_Init();
 
 
 	/* Init PWM mode for PA2 and PE6. Using TIM9, Channel 1 and 2 */
@@ -78,29 +81,51 @@ int main(void) {
    	    GPIOE_InitDef.GPIO_PuPd = GPIO_PuPd_NOPULL;
    	    GPIOE_InitDef.GPIO_Speed = GPIO_Speed_100MHz;
    	    GPIO_Init(GPIOE, &GPIOE_InitDef);
+   	 /* GPIO G LED */
+		 RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOG, ENABLE);
+		 //Initialize struct
+		 GPIO_InitTypeDef GPIO_InitDef;
+		 //Pins 13 and 14
+		 GPIO_InitDef.GPIO_Pin = GPIO_Pin_13 | GPIO_Pin_14;
+		 //Mode output
+		 GPIO_InitDef.GPIO_Mode = GPIO_Mode_OUT;
+		 //Output type push-pull
+		 GPIO_InitDef.GPIO_OType = GPIO_OType_PP;
+		 //Without pull resistors
+		 GPIO_InitDef.GPIO_PuPd = GPIO_PuPd_NOPULL;
+		 //50MHz pin speed
+		 GPIO_InitDef.GPIO_Speed = GPIO_Speed_50MHz;
+		 //Initialize pins on GPIOG port
+		 GPIO_Init(GPIOG, &GPIO_InitDef);
 
    	/* Setting Motor1 */
-   	GPIO_SetBits(GPIOA, GPIO_Pin_6);
+	GPIO_ResetBits(GPIOA, GPIO_Pin_6);
    	GPIO_ResetBits(GPIOB, GPIO_Pin_0);
    	TM_PWM_SetChannelMicros(&TIM9_Data, TM_PWM_Channel_1, 1000);
 
    	/* Setting Motor2 */
-   	GPIO_SetBits(GPIOE, GPIO_Pin_2);
+   	GPIO_ResetBits(GPIOE, GPIO_Pin_2);
    	GPIO_ResetBits(GPIOB, GPIO_Pin_8);
    	TM_PWM_SetChannelMicros(&TIM9_Data, TM_PWM_Channel_2, 1000);
 
 
+   	if (!TM_HCSR04_Init(&HCSR04, GPIOD, GPIO_PIN_10, GPIOD, GPIO_PIN_14)) {
+   		        /* Sensor is not ready to use */
+   		        /* Maybe wiring is incorrect */
+   		        while (1) {
+   		        	GPIO_ToggleBits(GPIOG, GPIO_Pin_13 | GPIO_Pin_14);
+   		            Delayms(500);
+   		       }
+   		}
+
+
     while (1) {
-    		driveForward();
-    		int i=0;for(i=0;i<15000000;i++){}
+    	TM_HCSR04_Read(&HCSR04);
+    	ODL = HCSR04.Distance;
+    	SpinLeft();
+    	Delayms(500);
+    	SpinRight();
+    	Delayms(500);
 
-    		SpinLeft();
-    		for(i=0;i<10000000;i++){}
-
-    		driveForward();
-    		for(i=0;i<15000000;i++){}
-
-    		StopMotor();
-    		for(i=0;i<10000000;i++){}
     }
 }
