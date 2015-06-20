@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -g -nostartfiles -Map=STM.map -O0 --gc-sections -LC:\CooCox\CoIDE\configuration\ProgramData\STM -TC:\CooCox\CoIDE\configuration\ProgramData\STM/arm-gcc-link.ld -g">
+      <target file="STM.elf" lastModified="14df86cdaec">
+         <source file="..\obj\stm32f4xx_usart.o" lastModified="14df838f1e5"/>
+         <source file="..\obj\startup_stm32f4xx.o" lastModified="14df838f243"/>
+         <source file="..\obj\main.o" lastModified="14df86cd8aa"/>
+         <source file="..\obj\stm32f4xx_rcc.o" lastModified="14df838f512"/>
+         <source file="..\obj\stm32f4xx_gpio.o" lastModified="14df838f57f"/>
+         <source file="..\obj\system_stm32f4xx.o" lastModified="14df838f5dd"/>
+         <source file="..\obj\stm32f4xx_exti.o" lastModified="14df838f63b"/>
+         <source file="..\obj\misc.o" lastModified="14df838f698"/>
+         <source file="..\obj\stm32f4xx_tim.o" lastModified="14df838f754"/>
+      </target>
+   </processor>
+</history>
