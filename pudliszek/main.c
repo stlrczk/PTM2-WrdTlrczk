@@ -14,39 +14,6 @@ int obstacle = 45;
 int action = 80;
 
 
-
-/*
-
-
-        biblioteka wymaga:
-        #include "stm32f4xx.h"
-        #include "stm32f4xx_gpio.h"
-        #include "stm32f4xx_rcc.h"
-
-        przyk³ad:
-
-        int main(void) {
-                SystemInit();
-                MotorGPIOinit();
-                SetMotors();
-
-
-
-                while (1) {
-                                int i=0;
-                                driveForward();
-                                for(i=0;i<10000000;i++){}
-                                driveBackward();
-                                for(i=0;i<10000000;i++){}
-                }
-        }
-
-
-*/
-
-
-
-
 /* Motor Library */
         void SetMotorBits(int m1a, int m1b, int m2a, int m2b){
                 //Motor1 - PA6, PB0
@@ -153,26 +120,9 @@ void setupLedAndButton()
 	TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
 	TIM_Cmd(TIM4,ENABLE);
 
-	/*
-	TIM_TimeBaseStructure.TIM_Period= 4200; //625
-	TIM_TimeBaseStructure.TIM_Prescaler= 2000;	//21
-	TIM_TimeBaseStructure.TIM_ClockDivision= TIM_CKD_DIV1;
-	TIM_TimeBaseStructure.TIM_CounterMode= TIM_CounterMode_Up;
-	TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
-	TIM_Cmd(TIM2,ENABLE);
 
 
 
-	/*
-	TIM_OCInitTypeDef TIM_OCInitStructure;
-
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-	GPIO_PinAFConfig(GPIOD, GPIO_PinSource12, GPIO_AF_TIM4);
-
-	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
-	TIM_OCInitStructure.TIM_OutputState	= TIM_OutputState_Enable;
-	TIM_OCInitStructure.TIM_Pulse = 0;
-	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;*/
 
 	/* PWM1 Mode configuration: */
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3,ENABLE);
@@ -182,16 +132,7 @@ void setupLedAndButton()
 	TIM_TimeBaseStructure.TIM_CounterMode= TIM_CounterMode_Up;
 	TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
 	TIM_Cmd(TIM3,ENABLE);
-/*
-	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
-	TIM_OCInitStructure.TIM_OutputState	= TIM_OutputState_Enable;
-	TIM_OCInitStructure.TIM_Pulse = 0;
-	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
 
-	TIM_OC1Init(TIM3, &TIM_OCInitStructure);
-	TIM_OC1PreloadConfig(TIM3, TIM_OCPreload_Enable);
-	TIM_OC1Init(TIM4, &TIM_OCInitStructure);
-	TIM_OC1PreloadConfig(TIM4, TIM_OCPreload_Enable);*/
 
 	//TIM 3
 
@@ -199,18 +140,6 @@ void setupLedAndButton()
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4,ENABLE);
 
 
-
-	/*//GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-	GPIO_PinAFConfig(GPIOD, GPIO_PinSource13, GPIO_AF_TIM3);
-	//TIM_OCInitTypeDef TIM_OCInitStructure;
-	/* PWM1 Mode configuration: *//*
-	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
-	TIM_OCInitStructure.TIM_OutputState	= TIM_OutputState_Enable;
-	TIM_OCInitStructure.TIM_Pulse = 0;
-	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
-
-	TIM_OC1Init(TIM3, &TIM_OCInitStructure);
-	TIM_OC1PreloadConfig(TIM3, TIM_OCPreload_Enable);*/
 
 
 
@@ -232,23 +161,6 @@ void setupLedAndButton()
 
 	TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
 	TIM_ITConfig(TIM3, TIM_IT_Update,ENABLE);
-
-/*
-	// konfiguracja linii Tx
-	GPIO_PinAFConfig(GPIOC, GPIO_PinSource10, GPIO_AF_USART3);
-	//GPIO_InitTypeDef GPIO_InitStructure;
-	GPIO_InitStructure. GPIO_OType = GPIO_OType_PP ;
-	GPIO_InitStructure. GPIO_PuPd = GPIO_PuPd_UP ;
-	GPIO_InitStructure. GPIO_Mode = GPIO_Mode_AF ;
-
-	GPIO_InitStructure. GPIO_Pin = GPIO_Pin_10 ;
-	GPIO_InitStructure. GPIO_Speed = GPIO_Speed_50MHz ;
-	GPIO_Init(GPIOC, &GPIO_InitStructure);
-	// konfiguracja linii Rx
-	GPIO_PinAFConfig(GPIOC, GPIO_PinSource11, GPIO_AF_USART3);
-	GPIO_InitStructure. GPIO_Mode = GPIO_Mode_AF ;
-	GPIO_InitStructure. GPIO_Pin = GPIO_Pin_11;
-	GPIO_Init(GPIOC, &GPIO_InitStructure);*/
 
 
 }
